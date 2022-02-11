@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  database:
+    image: docker pull mysql:5.7
+    ports:
+      - 3306
+    env_file:
+      - secrets.env
+  guestbook:
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    env_file:
+      - secrets.env
+    depends_on:
+      - database
