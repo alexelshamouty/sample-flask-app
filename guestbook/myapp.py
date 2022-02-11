@@ -10,9 +10,9 @@ def create_app():
 
     @app.route("/guestbook")
     def guestbook():
-        user1 = environ("USER1")
-        user2 = environ("USER2")
-        return f"<h1> will be here in a bit {{user1}} {{user2}}</h1>"
+        user1 = environ["USER1"]
+        user2 = environ["USER2"]
+        return f"<h1> will be here in a bit {user1} {user2}</h1>"
 
     return app
 

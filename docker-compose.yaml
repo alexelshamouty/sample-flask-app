@@ -8,18 +8,20 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "abc123"
     env_file:
-      - secrets.env
+      - secrets.yaml
   guestbook:
     build:
       context: .
       target: development
       dockerfile: Dockerfile
+    volumes:
+      - ./guestbook:/app/guestbook
     environment:
       FLASK_ENV: development
       LOG_LEVEL: "DEBUG"
     ports:
-      - "5000:9500"
+      - "9000:9000"
     env_file:
-      - secrets.env
+      - secrets.yaml
     depends_on:
       - database
