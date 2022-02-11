@@ -1,4 +1,5 @@
 from flask import Flask, redirect, render_template, url_for
+from os import environ
 
 def create_app():
     app = Flask(__name__)
@@ -9,7 +10,9 @@ def create_app():
 
     @app.route("/guestbook")
     def guestbook():
-        return "<h1> will be here in a bit </h1>"
+        user1 = environ("USER1")
+        user2 = environ("USER2")
+        return f"<h1> will be here in a bit {{user1}} {{user2}}</h1>"
 
     return app
 

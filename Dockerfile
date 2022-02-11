@@ -12,6 +12,6 @@ RUN ~/.poetry/bin/poetry install
 
 FROM base as development
 USER app
-COPY --chown=app:app guestbook /app
+COPY --chown=app:app guestbook /app/guestbook
 EXPOSE 5000
-CMD ~/.poetry/bin/poetry run python myapp.py
+CMD ~/.poetry/bin/poetry run flask --host=0.0.0.0 myapp.py

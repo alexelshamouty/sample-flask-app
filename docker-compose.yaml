@@ -2,9 +2,11 @@ version: "3.9"
 
 services:
   database:
-    image: docker pull mysql:5.7
+    image: "mysql:5.7"
     ports:
       - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "abc123"
     env_file:
       - secrets.env
   guestbook:
@@ -12,8 +14,11 @@ services:
       context: .
       target: development
       dockerfile: Dockerfile
+    environment:
+      FLASK_ENV: development
+      LOG_LEVEL: "DEBUG"
     ports:
-      - "5000:5000"
+      - "5000:9500"
     env_file:
       - secrets.env
     depends_on:
