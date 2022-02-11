@@ -5,7 +5,7 @@ def create_app():
 
     @app.route("/")
     def hello():
-        return render_template("templates/index.html")
+        return render_template("index.html")
 
     @app.route("/guestbook")
     def guestbook():
