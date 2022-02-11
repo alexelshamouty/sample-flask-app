@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "guest-book"
+version = "0.1.0"
+description = "Guest app using flask ... will show your secrets so be careful :P"
+authors = ["Alex Elshamouty <aelshamouty@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "3.7.1"
+Flask = "^2.0.2"
+flask-nav = "^0.6"
+gunicorn = "^20.1.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+isort = "^5.10.1"
+flake8 = "^4.0.1"
+pytest = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
