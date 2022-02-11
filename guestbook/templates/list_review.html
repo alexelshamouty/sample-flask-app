@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h1>
+    I'll be listing reviews here! We currently have the following users in our DB
+    </h1>
+</div>
+{% for user in users %}
+<p> {{ user }} </p>
+{% endfor %}
+{% endblock %}
