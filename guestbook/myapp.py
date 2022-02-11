@@ -1,39 +1,39 @@
-from os import environ
+from flask import flash, redirect, render_template
+from guestbook.forms import LoginForm,AddReviewForm
+from guestbook.models import User, Reviews
+from guestbook import app
 
-from flask import Flask, flash, redirect, render_template
-from flask_login import LoginManager
+@app.route("/")
+def index():
+    return render_template("base.html")
 
-from guestbook.forms import LoginForm
+
+@app.route("/guestbook")
+def guestbook():
+    reviews = Reviews.query.all()
+    return render_template("list_review.html", reviews=reviews)
 
 
-def create_app():
-    app = Flask(__name__)
-    app.config["SECRET_KEY"] = environ.get("SECRET_KEY")
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        return redirect("/guestbook")
+    return render_template("login.html", form=form)
 
-    login = LoginManager(app)
 
-    @app.route("/")
-    def index():
-        return render_template("base.html")
-
-    @app.route("/guestbook")
-    def guestbook():
-        user1 = environ.get("USER1")
-        user2 = environ.get("USER2")
-        return render_template("list_review.html", users=[user1, user2])
-
-    @app.route("/login", methods=["GET", "POST"])
-    def login():
-        # This is not checking against any source of truth .. maybe an ldap plugin or something but yeah..
-        form = LoginForm()
-        if form.validate_on_submit():
-            username = form.username.data
-            return redirect("/guestbook")
-        return render_template("login.html", form=form)
-
-    return app
+@app.route("/addreview", methods=["GET", "POST"])
+def add_review():
+    form = AddReviewForm()
+    if form.validate_on_submit():
+        flash("We will submit your book review! thank you")
+        book_name = form.book_name.data
+        review = form.review.data
+        Reviews(book_name=book_name, review=review)
+        return redirect("/")
+    return render_template("add_review.html", form=form)
 
 
 if __name__ == "__main__":
-    application = create_app()
-    application.run()
+    app.run(host="0.0.0.0")

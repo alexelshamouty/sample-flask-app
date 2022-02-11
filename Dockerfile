@@ -14,6 +14,7 @@ FROM base as development
 USER app
 RUN mkdir -p /app/guestbook
 RUN chown app:app /app/guestbook
+#RUN ~/.poetry/bin/poetry run flask 
 #ADD --chown=app:app guestbook /app/guestbook
 EXPOSE 9000
-CMD ~/.poetry/bin/poetry run gunicorn -c guestbook/gcorn.conf
+CMD ~/.poetry/bin/poetry run gunicorn --reload -c guestbook/gcorn.conf

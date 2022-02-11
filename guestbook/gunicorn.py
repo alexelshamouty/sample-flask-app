@@ -1,3 +1,4 @@
-from guestbook.myapp import create_app
+from guestbook.myapp import app
 
-app = create_app()
+if __name__ == "__main__":
+    app.run()
