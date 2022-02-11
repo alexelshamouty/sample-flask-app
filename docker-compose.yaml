@@ -5,8 +5,6 @@ services:
     image: "mysql:5.7"
     ports:
       - 3306
-    environment:
-      MYSQL_ROOT_PASSWORD: "abc123"
     env_file:
       - secrets.yaml
   guestbook:
