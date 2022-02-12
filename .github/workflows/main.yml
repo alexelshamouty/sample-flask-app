@@ -2,7 +2,7 @@
 
 name: BUILD
 env:
-  GCP_PROJECT_ID: " myapp-341118"
+  GCP_PROJECT_ID: "myapp-341118"
   GKE_CLUSTER_NAME: "myappcluster"
   GCP_REGION: "europe-west4"
   GCP_ARTIFACT_REPOSITORY: "my-secure-apps"
