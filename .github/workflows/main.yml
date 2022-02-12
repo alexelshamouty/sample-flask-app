@@ -33,4 +33,4 @@ jobs:
       - name: Run tests
         run: |
           echo Running checks
-          docker run myapp '/bin/bash /app/checks.sh'
+          docker run myapp '/app/checks.sh'
