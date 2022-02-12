@@ -2,10 +2,16 @@
 {% block content %}
 <div>
     <h1>
-    I'll be listing reviews here! We currently have the following users in our DB
+        Here is the list of the reviews that we have currently
     </h1>
+    <hr>
 </div>
-{% for user in users %}
-<p> {{ user }} </p>
+{% for review in reviews %}
+<div>
+    <p> Book_name: {{ review.book_name }} </p>
+    <p> Review: {{ review.review }} </p>
+</div>
+<hr>
+</br>
 {% endfor %}
 {% endblock %}

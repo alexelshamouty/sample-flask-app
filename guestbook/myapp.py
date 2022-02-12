@@ -2,6 +2,7 @@ from flask import flash, redirect, render_template
 from guestbook.forms import LoginForm,AddReviewForm
 from guestbook.models import User, Reviews
 from guestbook import app
+from guestbook import db
 
 @app.route("/")
 def index():
@@ -30,6 +31,9 @@ def add_review():
         flash("We will submit your book review! thank you")
         book_name = form.book_name.data
         review = form.review.data
+        new_review = Reviews(book_name=book_name, review=review)
+        db.session.add(new_review)
+        db.session.commit()
         Reviews(book_name=book_name, review=review)
         return redirect("/")
     return render_template("add_review.html", form=form)
