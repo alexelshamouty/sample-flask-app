@@ -63,5 +63,3 @@ jobs:
       - name: Check that we have access to the cluster
         run: |
           gcloud info
-          
-          
