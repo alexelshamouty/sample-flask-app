@@ -12,6 +12,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
+mysql_secret_name: mysqlsecrets
+mysql_service_name: database
+
 imagePullSecrets:
   - name: artifactcred
 nameOverride: ""
