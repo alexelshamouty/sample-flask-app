@@ -38,5 +38,7 @@ jobs:
       - uses: advancedcsg-open/action-jfrog-cli@master
         env:
           JF_ARTIFACTORY_1: ${{ secrets.ART_TOKEN }
-        - run: |
-            jfrog rt ping
+
+      - name: Setup JFrog CLI
+        uses: advancedcsg-open/action-jfrog-cli@master
+        run: jfrog rt ping
