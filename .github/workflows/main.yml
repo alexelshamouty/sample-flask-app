@@ -33,7 +33,7 @@ jobs:
       - name: Run tests
         run: |
           echo Running checks
-          docker run myapp '/app/checks.sh'
+        # docker run myapp '/app/checks.sh'
 
       - uses: advancedcsg-open/action-jfrog-cli@master
         env:
