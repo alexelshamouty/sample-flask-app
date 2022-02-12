@@ -35,8 +35,7 @@ jobs:
           echo Running checks
           docker run myapp '/app/checks.sh'
 
-      - name: Prepare artifactory
-        uses: advancedcsg-open/action-jfrog-cli@master
+      - uses: advancedcsg-open/action-jfrog-cli@master
         env:
           JF_ARTIFACTORY_1: ${{ secrets.ART_TOKEN }
         - run: |
