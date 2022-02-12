@@ -4,7 +4,7 @@ name: BUILD
 env:
   GCP_PROJECT_ID: " myapp-341118"
   GKE_CLUSTER_NAME: "myappcluster"
-  GCP_REGION: "europe-west4-a"
+  GCP_REGION: "europe-west4"
   GCP_ARTIFACT_REPOSITORY: "my-secure-apps"
 
 # Controls when the workflow will run
