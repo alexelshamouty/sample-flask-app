@@ -48,6 +48,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
         with:
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
           project_id: ${{ env.GCP_PROJECT_ID }}
 
       - name: Check that we have access to the cluster
