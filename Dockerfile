@@ -5,14 +5,12 @@ RUN mkdir -p /app && chown -R app:app /app
 USER app
 WORKDIR /app
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-USER root
-RUN copy --cown=app:app ~/.poetry/bin/poetry /usr/bin/local/poetry
-USER app
 RUN echo 'export PATH=$PATH:/home/app/.poetry/bin' >> ~/.bashrc
 COPY --chown=app:app poetry.lock pyproject.toml /app/
 COPY --chown=app:app checks.sh /app/
 RUN chmod a+x checks.sh
-RUN ~/.poetry/bin/poetry install
+ENV PATH /home/app/.poetry/bin:$PATH
+RUN poetry install 
 
 
 
@@ -23,4 +21,4 @@ RUN chown app:app /app/guestbook
 COPY --chown=app:app guestbook /app/guestbook
 COPY --chown=app:app load_db.sh /app
 EXPOSE 9000
-CMD ~/.poetry/bin/poetry run gunicorn --reload -c guestbook/gcorn.conf
+CMD poetry run gunicorn --reload -c guestbook/gcorn.conf
