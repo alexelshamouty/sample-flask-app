@@ -1,5 +1,7 @@
 from flask_login import UserMixin
+
 from guestbook import db
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms.validators import DataRequired
 from wtforms import BooleanField, PasswordField, StringField, SubmitField
+from wtforms.validators import DataRequired
 from wtforms.widgets import TextArea
 
 # Could also do some more validation but let's keep it simple
@@ -14,6 +14,5 @@ class LoginForm(FlaskForm):
 
 class AddReviewForm(FlaskForm):
     book_name = StringField("Book Name", validators=[DataRequired()])
-    review = StringField(u'Review', widget=TextArea())
+    review = StringField("Review", widget=TextArea())
     submit = SubmitField("Submit review")
-

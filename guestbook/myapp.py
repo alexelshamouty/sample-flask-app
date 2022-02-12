@@ -1,8 +1,9 @@
 from flask import flash, redirect, render_template
-from guestbook.forms import LoginForm,AddReviewForm
-from guestbook.models import User, Reviews
-from guestbook import app
-from guestbook import db
+
+from guestbook import app, db
+from guestbook.forms import AddReviewForm, LoginForm
+from guestbook.models import Reviews, User
+
 
 @app.route("/")
 def index():

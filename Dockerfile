@@ -5,7 +5,7 @@ RUN mkdir -p /app && chown -R app:app /app
 USER app
 WORKDIR /app
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-RUN echo 'export PATH=$PATH:/home/app/.poetry/bin' >> ~/.bash_profile
+RUN echo 'export PATH=$PATH:/home/app/.poetry/bin' >> ~/.bashrc
 COPY --chown=app:app poetry.lock pyproject.toml /app/
 COPY --chown=app:app checks.sh /app/
 RUN chmod a+x checks.sh

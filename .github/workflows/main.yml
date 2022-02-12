@@ -34,3 +34,15 @@ jobs:
         run: |
           echo Running checks
           docker run myapp '/app/checks.sh'
+  upload:
+    name: Upload app
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: publish to artifactory
+        uses: advancedcsg-open/action-jfrog-cli@master
+        with:
+          url: 'https://alexedevenv.jfrog.io/'
+          credentials type: 'apikey'
+          apykey: ${{ secrets.ART_TOKEN }}
+
