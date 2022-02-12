@@ -47,6 +47,7 @@ jobs:
       - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0
         with:
+          export_default_credentials: true
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
           project_id: ${{ env.GCP_PROJECT_ID }}
