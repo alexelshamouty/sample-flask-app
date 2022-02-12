@@ -27,16 +27,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run Docker build
-        run: docker build . -t myapp:${GITHUB_SHA}
-
-      # Runs a set of commands using the runners shell
-      - name: Run tests
-        run: |
-          echo Running checks
-          docker run myapp:${GITHUB_SHA} '/app/checks.sh'
-
       - name: Install tools
         run: |
           wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux -O /usr/local/bin/sops
@@ -48,12 +38,21 @@ jobs:
           wget -q https://github.com/roboll/helmfile/releases/download/v0.143.0/helmfile_linux_amd64 -O /usr/local/bin/helmfile
           chmod a+x /usr/local/bin/helmfile
           
-          wget  -q "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -O /usr/local/bin/
+          wget  -q "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl
           chmod a+x /usr/local/bin/kubectl
           
           helm plugin install https://github.com/jkroepke/helm-secrets
           helm plugin install https://github.com/databus23/helm-diff
 
+      # Runs a single command using the runners shell
+      - name: Run Docker build
+        run: docker build . -t myapp:${GITHUB_SHA}
+
+      # Runs a set of commands using the runners shell
+      - name: Run tests
+        run: |
+          echo Running checks
+          docker run myapp:${GITHUB_SHA} '/app/checks.sh'
 
       - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0
