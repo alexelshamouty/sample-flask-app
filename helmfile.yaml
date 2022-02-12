@@ -4,9 +4,11 @@ releases:
     namespace: myapp
     createNamespace: true
     values:
-      - values-prod.yaml
+      - values-{{ .Environment.Name }}.yaml
     secrets:
-      - secrets-prod.yaml
+      - secrets-{{ .Environment.Name }}.yaml
 environments:
   prod:
     kubeContext: kubernetes-admin@kubernetes
+  dev:
+    kubeContext: gke_myapp-341118_europe-west4_myappcluster
