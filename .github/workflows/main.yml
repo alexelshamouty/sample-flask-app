@@ -71,7 +71,7 @@ jobs:
       - name: Run tests
         run: |
           echo Running checks
-          docker run myapp:${GITHUB_SHA} '/app/checks.sh'
+          docker run ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:${GITHUB_SHA} '/app/checks.sh'
 
       - name: Push image to artifacter
         run: |

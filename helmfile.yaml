@@ -3,10 +3,16 @@ releases:
     chart: "deploy/"
     namespace: myapp
     createNamespace: true
+environments:
+  prod:
+    kubeContext: kubernetes-admin@kubernetes
     values:
       - values-prod.yaml
     secrets:
       - secrets-prod.yaml
-environments:
-  prod:
-    kubeContext: kubernetes-admin@kubernetes
+  dev:
+    kubeContext: gke_myapp-341118_europe-west4_myappcluster
+    values:
+      - values-dev.yaml
+    secrets:
+      - secrets-dev.yaml
