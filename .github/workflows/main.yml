@@ -55,7 +55,8 @@ jobs:
           gcloud info
           gcloud config set  project ${{ env.GCP_PROJECT_ID }}
 
-      - name: Configure docker
+      - name: Configure docker and kubectl
+        run: |
         gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev
         gcloud container clusters get-credentials ${{ env.GKE_CLUSTER_NAME }} --region ${{ env.GCP_REGION }} --project ${{ env.GCP_PROJECT_ID }}
         kubectl cluster-info
