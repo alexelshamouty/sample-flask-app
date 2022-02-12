@@ -45,9 +45,9 @@ jobs:
           helm plugin install https://github.com/databus23/helm-diff
 
       - name: Setup Gcloud
-        uses: google-github-actions/setup-gcloud@v0.2.1
+        uses: google-github-actions/setup-gcloud@v0
         with:
-          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
           project_id: ${{ env.GCP_PROJECT_ID }}
 
       - name: Check that we have access to the cluster
