@@ -5,8 +5,6 @@ name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -33,13 +31,4 @@ jobs:
       - name: Run tests
         run: |
           echo Running checks
-          # docker run myapp '/app/checks.sh'
-
-      - name: Login to artifactrory
-        run: |
-          echo ${{ secrets.ART_PASS }} | docker login --username ${{ secrets.ART_USER }} --password-stdin https://alexedevenv.jfrog.io 
-
-      - name: tag and push my app
-        run: | 
-          docker tag myapp alexedevenv.jfrog.io/alexdevenv-docker/myapp:latest
-          docker push alexedevenv.jfrog.io/alexdevenv-docker/myapp:latest
+          docker run myapp '/app/checks.sh'
