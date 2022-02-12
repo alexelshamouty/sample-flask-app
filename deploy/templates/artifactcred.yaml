@@ -1,3 +1,4 @@
+{{- if .Values.artifactsecret.create -}}
 ---
 apiVersion: v1
 kind: Secret
@@ -7,3 +8,4 @@ metadata:
 data:
   .dockerconfigjson: {{ .Values.DOCKER_AUTH | b64enc | quote }}
 type: kubernetes.io/dockerconfigjson
+{{- end }}

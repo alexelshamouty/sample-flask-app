@@ -20,6 +20,9 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
+artifactsecret:
+  create: false
+  
 serviceAccount:
   # Specifies whether a service account should be created
   create: false
