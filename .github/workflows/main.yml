@@ -30,7 +30,7 @@ jobs:
         run: docker build . -t myapp
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Run tests
         run: |
           echo Running checks
-          docker run myapp 'checks.sh'
+          docker run myapp 'bash /app/checks.sh'
