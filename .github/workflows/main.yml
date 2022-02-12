@@ -57,10 +57,10 @@ jobs:
 
       - name: Configure docker and kubectl
         run: |
-        gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev
-        gcloud container clusters get-credentials ${{ env.GKE_CLUSTER_NAME }} --region ${{ env.GCP_REGION }} --project ${{ env.GCP_PROJECT_ID }}
-        kubectl cluster-info
-        kubectl config current-context
+          gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev
+          gcloud container clusters get-credentials ${{ env.GKE_CLUSTER_NAME }} --region ${{ env.GCP_REGION }} --project ${{ env.GCP_PROJECT_ID }}
+          kubectl cluster-info
+          kubectl config current-context
 
 
       # Runs a single command using the runners shell
