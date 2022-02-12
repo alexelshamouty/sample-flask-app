@@ -1,0 +1,12 @@
+releases:
+  - name: "myapp"
+    chart: "deploy/"
+    namespace: portal
+    createNamespace: true
+    values:
+      - values-prod.yaml
+    secrets:
+      - secrets-prod.yaml
+environments:
+  prod:
+    kubeContext: kubernetes-admin@kubernetes

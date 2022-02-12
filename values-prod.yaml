@@ -4,19 +4,22 @@
 
 replicaCount: 1
 
+port: 9000
+
 image:
-  repository: nginx
+  repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: artifactoryreg
 nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
