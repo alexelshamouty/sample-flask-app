@@ -76,3 +76,7 @@ jobs:
       - name: Push image to artifacter
         run: |
           docker push ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:${GITHUB_SHA}
+
+      - name: Deploy using helmfile
+        run: |
+          helmfile -e dev apply --set image.repository=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp --set image.tag=${GITHUB_SHA}
