@@ -2,9 +2,10 @@
 
 name: BUILD
 env:
-  GCP_PROJECT_ID: " myapp-341118 "
+  GCP_PROJECT_ID: " myapp-341118"
   GKE_CLUSTER_NAME: "myappcluster"
-  GCP_REGION: "europe-west4"
+  GCP_REGION: "europe-west4-a"
+  GCP_ARTIFACT_REPOSITORY: "my-secure-apps"
 
 # Controls when the workflow will run
 on:
@@ -43,16 +44,6 @@ jobs:
           helm plugin install https://github.com/jkroepke/helm-secrets
           helm plugin install https://github.com/databus23/helm-diff
 
-      # Runs a single command using the runners shell
-      - name: Run Docker build
-        run: docker build . -t myapp:${GITHUB_SHA}
-
-      # Runs a set of commands using the runners shell
-      - name: Run tests
-        run: |
-          echo Running checks
-          docker run myapp:${GITHUB_SHA} '/app/checks.sh'
-
       - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0
         with:
@@ -62,3 +53,25 @@ jobs:
       - name: Check that we have access to the cluster
         run: |
           gcloud info
+          gcloud config set  project ${{ env.GCP_PROJECT_ID }}
+
+      - name: Configure docker
+        gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev
+        gcloud container clusters get-credentials ${{ env.GKE_CLUSTER_NAME }} --region ${{ env.GCP_REGION }} --project ${{ env.GCP_PROJECT_ID }}
+        kubectl cluster-info
+        kubectl config current-context
+
+
+      # Runs a single command using the runners shell
+      - name: Run Docker build
+        run: docker build . -t ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:${GITHUB_SHA}
+
+      # Runs a set of commands using the runners shell
+      - name: Run tests
+        run: |
+          echo Running checks
+          docker run myapp:${GITHUB_SHA} '/app/checks.sh'
+
+      - name: Push image to artifacter
+        run: |
+          docker push ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:${GITHUB_SHA}
