@@ -1,3 +1,3 @@
 creation_rules:
-  - path_regex: secrets\-prod\.yaml$
+  - path_regex: secrets-prod\.yaml$
     age: age1hgkpp6efe38j8d3fdfeked9h97w7hdycqp90dnzzw0dlyfkdavgqp5kysu

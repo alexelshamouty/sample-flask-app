@@ -1,7 +1,7 @@
 releases:
   - name: "myapp"
     chart: "deploy/"
-    namespace: portal
+    namespace: myapp
     createNamespace: true
     values:
       - values-prod.yaml

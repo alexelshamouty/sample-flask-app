@@ -5,5 +5,5 @@ metadata:
   namespace: {{ .Release.Namespace | quote }}
   name: artifactcred
 data:
-  .dockerconfigjson: {{ .Values.DOCKER_LOGIN_STRING }}
+  .dockerconfigjson: {{ .Values.DOCKER_AUTH | b64enc | quote }}
 type: kubernetes.io/dockerconfigjson
