@@ -1,8 +1,19 @@
+repositories:
+  - name: stable
+    url: https://charts.bitnami.com/bitnami
 releases:
   - name: "myapp"
     chart: "deploy/"
     namespace: myapp
     createNamespace: true
+    values:
+      - values-{{ .Environment.Name }}.yaml
+    secrets:
+      - secrets-{{ .Environment.Name }}.yaml
+  - name: mysql
+    namespace: myapp
+    createNamespace: true
+    chart: bitnami/mysql
     values:
       - values-{{ .Environment.Name }}.yaml
     secrets:

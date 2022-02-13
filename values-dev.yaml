@@ -14,6 +14,7 @@ image:
 
 mysql_secret_name: mysqlsecrets
 mysql_service_name: database
+mysql_storage_cluster: standard
 
 imagePullSecrets:
   - name: artifactcred
