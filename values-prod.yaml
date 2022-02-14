@@ -8,6 +8,8 @@ port: 9000
 
 ingressname: myapp
 
+ingressname: "mypp"
+
 myapp:
   image:
     repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
