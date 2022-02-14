@@ -9,5 +9,6 @@
 - [ ] Deploy MySQL as a part of the mix - Deployed on a regular node 
 
 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
 ![Build status](https://github.com/alexelshamouty/sample-flask-app/actions/workflows/main.yml/badge.svg)
 ![Release status](https://github.com/alexelshamouty/sample-flask-app/actions/workflows/release.yml/badge.svg)
