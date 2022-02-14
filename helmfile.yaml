@@ -15,7 +15,7 @@ releases:
     createNamespace: true
     chart: bitnami/mysql
     values:
-      - values-{{ .Environment.Name }}.yaml
+      - values-mysql-shared.yaml
     secrets:
       - secrets-{{ .Environment.Name }}.yaml
 environments:
