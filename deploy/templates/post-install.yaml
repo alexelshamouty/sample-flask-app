@@ -5,22 +5,14 @@ metadata:
  annotations:
    "helm.sh/hook": "post-install"
 spec:
-<<<<<<< HEAD
  {{- with .Values.myapp.imagePullSecrets }}
-=======
- {{- with .Values.imagePullSecrets }}
->>>>>>> af59891a103e3c0e21b077b90425b781f2665b9d
  imagePullSecrets:  {{- toYaml . | nindent 8 }}
  {{- end }}
  containers:
  - name: populate_db
    securityContext:
      {{- toYaml .Values.securityContext | nindent 12 }}
-<<<<<<< HEAD
    image: "{{ .Values.myapp.image.repository }}:{{ .Values.myapp.image.tag | default .Chart.AppVersion }}"
-=======
-   image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
->>>>>>> af59891a103e3c0e21b077b90425b781f2665b9d
    imagePullPolicy: IfNotPresent
    env:
      - name: MYSQL_HOST
