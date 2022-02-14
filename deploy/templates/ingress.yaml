@@ -7,11 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  {{ if .Values.dev }}
-  - host: "myapp-"${GITHUB_SHA}".alexelsh.com"
-    {{ else }}
-  - host: "myapp.alex.alexelsh.com"
-  {{ end }}
+  - host: {{ .Values.ingress.name }}".alexelsh.com"
     http:
       paths:
       - pathType: Prefix
