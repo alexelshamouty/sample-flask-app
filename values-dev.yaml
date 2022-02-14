@@ -11,7 +11,7 @@ global:
   storageClass: "standard"
 
 
-ingressname: mypp
+ingressname: mypp-dev
 
 myapp:
   image:
