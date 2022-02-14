@@ -1,3 +1,6 @@
+repositories:
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
 releases:
   - name: "myapp"
     chart: "deploy/"
@@ -5,6 +8,14 @@ releases:
     createNamespace: true
     values:
       - values-{{ .Environment.Name }}.yaml
+    secrets:
+      - secrets-{{ .Environment.Name }}.yaml
+  - name: mysql
+    namespace: myapp
+    createNamespace: true
+    chart: bitnami/mysql
+    values:
+      - values-mysql-shared.yaml
     secrets:
       - secrets-{{ .Environment.Name }}.yaml
 environments:

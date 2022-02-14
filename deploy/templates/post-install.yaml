@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: post-installhook
+ annotations:
+   "helm.sh/hook": "post-install"
+spec:
+ {{- with .Values.myapp.imagePullSecrets }}
+ imagePullSecrets:  {{- toYaml . | nindent 8 }}
+ {{- end }}
+ containers:
+ - name: populate_db
+   securityContext:
+     {{- toYaml .Values.securityContext | nindent 12 }}
+   image: "{{ .Values.myapp.image.repository }}:{{ .Values.myapp.image.tag | default .Chart.AppVersion }}"
+   imagePullPolicy: IfNotPresent
+   env:
+     - name: MYSQL_HOST
+       value: {{ .Values.mysql_service_name }}
+     - name: MYSQL_USER
+       valueFrom:
+         secretKeyRef:
+           name: {{ .Values.mysql_secret_name }}
+           key: mysql_user
+     - name: MYSQL_USER_PASSWORD
+       valueFrom:
+         secretKeyRef:
+           name: {{ .Values.mysql_secret_name }}
+           key: mysql_password
+     - name: FLASK_APP
+       value: gunicorn/myapp.py
+   command: ['/bin/bash', '-c']
+   args: ['poetry run flask db init; sleep 1 ; poetry run flask db migrate ; sleep 1 ;  poetry run flask db upgrade']
+ restartPolicy: Never
+ terminationGracePeriodSeconds: 0

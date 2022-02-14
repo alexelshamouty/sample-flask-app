@@ -6,23 +6,32 @@ replicaCount: 1
 
 port: 9000
 
-image:
-  repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+#For MySQL PVC
+global:
+  storageClass: "standard"
+
+myapp:
+  image:
+    repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+  imagePullSecrets:
+    - name: artifactcred
 
 mysql_secret_name: mysqlsecrets
-mysql_service_name: database
+mysql_service_name: mysql-headless
+mysql_storage_cluster: standard
 
-imagePullSecrets:
-  - name: artifactcred
 nameOverride: ""
 fullnameOverride: ""
 
+artifactsecret:
+  create: true
+
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
