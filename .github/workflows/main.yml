@@ -82,3 +82,4 @@ jobs:
       - name: Deploy using helmfile
         run: |
           helmfile --debug -e dev sync --set nameOverride=myapp-${GITHUB_SHA} --set image.repository=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp --set image.tag=${GITHUB_SHA}
+          helmfile diff --detailed-exitcode
