@@ -7,13 +7,13 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: {{ .Values.ingressname }}.alexelsh.nl
+  - host: "{{ .Values.ingressname }}.alexelsh.nl"
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /
         backend:
           service:
             name: {{ include "deploy.fullname" . }}
             port:
-              number: {{ .Values.port }}
+              number: 80

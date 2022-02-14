@@ -1,0 +1,3 @@
+flask_app: guestbook/myapp.py
+ingress:
+  enabled: true

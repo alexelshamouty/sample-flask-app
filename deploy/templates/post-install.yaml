@@ -9,7 +9,7 @@ spec:
  imagePullSecrets:  {{- toYaml . | nindent 8 }}
  {{- end }}
  containers:
- - name: populate_db
+ - name: populatedb
    securityContext:
      {{- toYaml .Values.securityContext | nindent 12 }}
    image: "{{ .Values.myapp.image.repository }}:{{ .Values.myapp.image.tag | default .Chart.AppVersion }}"
@@ -28,8 +28,8 @@ spec:
            name: {{ .Values.mysql_secret_name }}
            key: mysql_password
      - name: FLASK_APP
-       value: gunicorn/myapp.py
+       value: {{ .Values.flask_app }}
    command: ['/bin/bash', '-c']
-   args: ['poetry run flask db init; sleep 1 ; poetry run flask db migrate ; sleep 1 ;  poetry run flask db upgrade']
+   args: ['sleep 10 ; poetry run flask db init; sleep 1 ; poetry run flask db migrate ; sleep 1 ;  poetry run flask db upgrade; sleep 10']
  restartPolicy: Never
  terminationGracePeriodSeconds: 0
