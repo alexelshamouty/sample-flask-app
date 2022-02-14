@@ -10,3 +10,6 @@
 - [ ] Use argocd for production rollouts on GKE ( Different cluster ) on preemptible nodes
 - [X] Deploy MySQL as a part of the mix - Deployed on a regular node 1 on production only
 - [X] Nginx ingeress
+
+- Development url : http://myapp-dev.alexelsh.nl/
+- Production url : http://myapp.alexelsh.nl
