@@ -6,6 +6,10 @@ replicaCount: 1
 
 port: 9000
 
+#For MySQL PVC
+global:
+  storageClass: "standard"
+
 image:
   repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
   pullPolicy: IfNotPresent
@@ -13,7 +17,7 @@ image:
   tag: ""
 
 mysql_secret_name: mysqlsecrets
-mysql_service_name: database
+mysql_service_name: mysql-headless
 mysql_storage_cluster: standard
 
 imagePullSecrets:
@@ -23,10 +27,10 @@ fullnameOverride: ""
 
 artifactsecret:
   create: false
-  
+
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
