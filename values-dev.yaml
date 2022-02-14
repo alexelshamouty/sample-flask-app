@@ -11,6 +11,8 @@ global:
   storageClass: "standard"
 
 
+dev: true
+
 myapp:
   image:
     repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
