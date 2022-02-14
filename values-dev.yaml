@@ -8,14 +8,12 @@ port: 9000
 
 ingressname: myapp-dev
 
-ingressname: mypp-dev
-
 myapp:
   image:
-    repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
+    repository: europe-west4-docker.pkg.dev/myapp-341118/my-secure-apps/myapp
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "latest"
+    tag: "badca3d64798e4c48ecd7e4c25ed0e43fe328d80"
   imagePullSecrets:
     - name: artifactcred
       
