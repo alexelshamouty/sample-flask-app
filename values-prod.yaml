@@ -10,8 +10,7 @@ port: 9000
 global:
   storageClass: "standard"
 
-ingress:
-  name: "mypp"
+ingressname: "mypp"
 
 myapp:
   image:
