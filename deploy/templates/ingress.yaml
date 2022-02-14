@@ -8,7 +8,7 @@ metadata:
 spec:
   rules:
   {{ if .Values.dev }}
-  - host: "myapp-${GITHUB_SHA}.alexelsh.com"
+  - host: "myapp-"${GITHUB_SHA}".alexelsh.com"
     {{ else }}
   - host: "myapp.alex.alexelsh.com"
   {{ end }}
