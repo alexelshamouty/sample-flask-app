@@ -11,6 +11,8 @@ global:
   storageClass: "standard"
 
 
+ingressname: mypp-dev
+
 myapp:
   image:
     repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp

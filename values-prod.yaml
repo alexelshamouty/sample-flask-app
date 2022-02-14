@@ -10,6 +10,8 @@ port: 9000
 global:
   storageClass: "standard"
 
+ingressname: "mypp"
+
 myapp:
   image:
     repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
