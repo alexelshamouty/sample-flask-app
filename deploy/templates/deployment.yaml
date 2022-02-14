@@ -46,6 +46,8 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.mysql_secret_name }}
                   key: mysql_password
+            - name: SECRET_KEY
+              value: {{ .Values.SECRET_KEY }}
           ports:
             - name: http
               containerPort: {{ .Values.port }}

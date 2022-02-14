@@ -7,6 +7,7 @@ releases:
     namespace: myapp
     createNamespace: true
     values:
+      - values-shared.yaml
       - values-{{ .Environment.Name }}.yaml
     secrets:
       - secrets-{{ .Environment.Name }}.yaml
