@@ -10,18 +10,20 @@ port: 9000
 global:
   storageClass: "standard"
 
-image:
-  repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
-
+myapp:
+  image:
+    repository: alexedevenv.jfrog.io/alexdevenv-docker/myapp
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+  imagePullSecrets:
+    - name: artifactcred
+      
 mysql_secret_name: mysqlsecrets
 mysql_service_name: mysql-headless
 mysql_storage_cluster: standard
 
-imagePullSecrets:
-  - name: artifactcred
+
 nameOverride: ""
 fullnameOverride: ""
 
