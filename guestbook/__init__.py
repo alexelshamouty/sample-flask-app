@@ -1,9 +1,13 @@
 from os import environ
 
+import sentry_sdk
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+<<<<<<< HEAD
 import sentry_sdk
+=======
+>>>>>>> c94a1f6e8f6fe428a02b6573d97aaee15f79b5ce
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
@@ -12,12 +16,18 @@ if SENTRY_DSN:
     sentry_sdk.init(
         dsn=f"{SENTRY_DSN}",
         integrations=[FlaskIntegration()],
+<<<<<<< HEAD
 
+=======
+>>>>>>> c94a1f6e8f6fe428a02b6573d97aaee15f79b5ce
         # Set traces_sample_rate to 1.0 to capture 100%
         # of transactions for performance monitoring.
         # We recommend adjusting this value in production.
         traces_sample_rate=1.0,
+<<<<<<< HEAD
 
+=======
+>>>>>>> c94a1f6e8f6fe428a02b6573d97aaee15f79b5ce
         # By default the SDK will try to use the SENTRY_RELEASE
         # environment variable, or infer a git commit
         # SHA as release, however you may want to set
