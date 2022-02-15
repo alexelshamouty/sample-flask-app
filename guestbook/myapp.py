@@ -39,9 +39,11 @@ def add_review():
         return redirect("/")
     return render_template("add_review.html", form=form)
 
-@app.route('/debug-sentry')
+
+@app.route("/debug-sentry")
 def trigger_error():
     division_by_zero = 1 / 0
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
