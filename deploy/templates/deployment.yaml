@@ -34,6 +34,8 @@ spec:
           image: "{{ .Values.myapp.image.repository }}:{{ .Values.myapp.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.myapp.image.pullPolicy }}
           env:
+            - name: SENTRY_DSN
+              value: {{ .Values.SENTRY_DSN }}
             - name: MYSQL_HOST
               value: {{ .Values.mysql_service_name }}
             - name: MYSQL_USER
