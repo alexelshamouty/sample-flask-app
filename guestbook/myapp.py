@@ -17,8 +17,11 @@ def guestbook():
 
 
 @app.route("/login", methods=["GET", "POST"])
-@metrics.counter('numer_of_logins', 'Number of logins',
-         labels={'item_type': lambda: request.view_args['type']})
+@metrics.counter(
+    "numer_of_logins",
+    "Number of logins",
+    labels={"item_type": lambda: request.view_args["type"]},
+)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -28,7 +31,7 @@ def login():
 
 
 @app.route("/addreview", methods=["GET", "POST"])
-@metrics.gauge('in_progress_adding_review', 'Long running requests in progress')
+@metrics.gauge("in_progress_adding_review", "Long running requests in progress")
 def add_review():
     form = AddReviewForm()
     if form.validate_on_submit():

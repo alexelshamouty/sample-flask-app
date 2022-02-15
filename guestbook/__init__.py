@@ -5,7 +5,6 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from prometheus_flask_exporter import PrometheusMetrics
-import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
