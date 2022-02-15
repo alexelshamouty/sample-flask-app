@@ -4,6 +4,7 @@ import sentry_sdk
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from prometheus_flask_exporter import PrometheusMetrics
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
@@ -36,3 +37,4 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+metrics = PrometheusMetrics(app)
