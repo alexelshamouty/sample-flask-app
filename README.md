@@ -13,3 +13,6 @@
 
 - Development url : http://myapp-dev.alexelsh.nl/
 - Production url : http://myapp.alexelsh.nl
+
+
+- Template used: https://github.com/alexelshamouty/deployment_template
