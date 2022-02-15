@@ -7,7 +7,7 @@ spec:
     matchLabels:
     {{- include "deploy.labels" . | nindent 8 }}
   podMetricsEndpoints:
-  - port: {{ .Values.service.port | quote }}
+  - port: http
     path: /metrics
     scheme: http
 
