@@ -1,0 +1,15 @@
+apiVersion: monitoring.gke.io/v1alpha1
+kind: PodMonitor
+metadata:
+  name: prom-collector
+spec:
+  selector:
+    matchLabels:
+    {{- include "deploy.labels" . | nindent 8 }}
+  podMetricsEndpoints:
+  - port: http
+    path: /metrics
+    scheme: http
+
+    # (1) scrape metrics less frequently than the default (once every 60s)
+    interval: 30s

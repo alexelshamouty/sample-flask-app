@@ -387,6 +387,29 @@ dev = ["pre-commit", "tox"]
 testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
+name = "prometheus-client"
+version = "0.13.1"
+description = "Python client for the Prometheus monitoring system."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+twisted = ["twisted"]
+
+[[package]]
+name = "prometheus-flask-exporter"
+version = "0.18.7"
+description = "Prometheus metrics exporter for Flask"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+flask = "*"
+prometheus-client = "*"
+
+[[package]]
 name = "py"
 version = "1.11.0"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
@@ -603,7 +626,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "3.7.1"
-content-hash = "bbea76e43510d81367d6d58f64d34840b514ca716dd0dc3a98a7fd73247f65de"
+content-hash = "9a003d4c0580a7834e61c4ca6867f576d4ea0b93cd90280a7cd3b89164488d03"
 
 [metadata.files]
 alembic = [
@@ -871,6 +894,14 @@ platformdirs = [
 pluggy = [
     {file = "pluggy-1.0.0-py2.py3-none-any.whl", hash = "sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3"},
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
+]
+prometheus-client = [
+    {file = "prometheus_client-0.13.1-py3-none-any.whl", hash = "sha256:357a447fd2359b0a1d2e9b311a0c5778c330cfbe186d880ad5a6b39884652316"},
+    {file = "prometheus_client-0.13.1.tar.gz", hash = "sha256:ada41b891b79fca5638bd5cfe149efa86512eaa55987893becd2c6d8d0a5dfc5"},
+]
+prometheus-flask-exporter = [
+    {file = "prometheus_flask_exporter-0.18.7-py3-none-any.whl", hash = "sha256:38bc68db295d0f895ad0fb319b1bfd200ae273b33397ce497c9b96dceb708ce9"},
+    {file = "prometheus_flask_exporter-0.18.7.tar.gz", hash = "sha256:f1f6f23535479d41587a100a24a60cb9199c34986e95f6691496807ee5017e59"},
 ]
 py = [
     {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},

@@ -1,4 +1,4 @@
-from flask import flash, redirect, render_template
+from flask import flash, redirect, render_template, request
 
 from guestbook import app, db
 from guestbook.forms import AddReviewForm, LoginForm
@@ -17,6 +17,11 @@ def guestbook():
 
 
 @app.route("/login", methods=["GET", "POST"])
+@metrics.counter(
+    "numer_of_logins",
+    "Number of logins",
+    labels={"item_type": lambda: request.view_args["type"]},
+)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -26,6 +31,7 @@ def login():
 
 
 @app.route("/addreview", methods=["GET", "POST"])
+@metrics.gauge("in_progress_adding_review", "Long running requests in progress")
 def add_review():
     form = AddReviewForm()
     if form.validate_on_submit():
@@ -39,9 +45,11 @@ def add_review():
         return redirect("/")
     return render_template("add_review.html", form=form)
 
-@app.route('/debug-sentry')
+
+@app.route("/debug-sentry")
 def trigger_error():
     division_by_zero = 1 / 0
+
 
 @app.route("/debug-sentry")
 def trigger_error():
