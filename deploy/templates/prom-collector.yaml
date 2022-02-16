@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-    {{- include "deploy.labels" . | nindent 8 }}
+    {{- include "deploy.selectorLabels" . | nindent 8 }}
   podMetricsEndpoints:
   - port: http
     path: /metrics
