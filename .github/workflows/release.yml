@@ -69,12 +69,6 @@ jobs:
       - name: Run Docker build
         run: docker build . -t ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:latest
 
-      # Runs a set of commands using the runners shell
-      - name: Run tests
-        run: |
-          echo Running checks
-          docker run ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:${GITHUB_SHA} '/app/checks.sh'
-
       - name: Push image to artifacter
         run: |
           docker push ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:latest
