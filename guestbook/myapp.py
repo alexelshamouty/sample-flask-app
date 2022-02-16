@@ -1,6 +1,6 @@
 from flask import flash, redirect, render_template, request
 
-from guestbook import app, db
+from guestbook import app, db, metrics
 from guestbook.forms import AddReviewForm, LoginForm
 from guestbook.models import Reviews, User
 
@@ -49,12 +49,6 @@ def add_review():
 @app.route("/debug-sentry")
 def trigger_error():
     division_by_zero = 1 / 0
-
-
-@app.route("/debug-sentry")
-def trigger_error():
-    division_by_zero = 1 / 0
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
