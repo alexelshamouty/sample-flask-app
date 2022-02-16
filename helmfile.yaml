@@ -21,6 +21,6 @@ releases:
       - secrets-{{ .Environment.Name }}.yaml
 environments:
   prod:
-    kubeContext: kubernetes-admin@kubernetes
+    kubeContext: gke_myapp-341118_europe-west4_prod-cluster
   dev:
     kubeContext: gke_myapp-341118_europe-west4_myappcluster
