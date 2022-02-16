@@ -50,5 +50,6 @@ def add_review():
 def trigger_error():
     division_by_zero = 1 / 0
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
