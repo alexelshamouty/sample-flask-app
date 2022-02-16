@@ -1,12 +1,12 @@
-apiVersion: monitoring.gke.io/v1alpha1
-kind: PodMonitor
+apiVersion: monitoring.googleapis.com/v1alpha1
+kind: PodMonitoring
 metadata:
   name: prom-collector
 spec:
   selector:
     matchLabels:
-    {{- include "deploy.selectorLabels" . | nindent 8 }}
-  podMetricsEndpoints:
+      {{ include "deploy.selectorLabels" . | nindent 8 }}
+  endpoints:
   - port: http
     path: /metrics
     scheme: http
