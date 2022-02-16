@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from prometheus_flask_exporter import PrometheusMetrics
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-SENTRY_DSN = os.environ.get("SENTRY_DSN")
+SENTRY_DSN = environ.get("SENTRY_DSN")
 
 if SENTRY_DSN:
     sentry_sdk.init(
