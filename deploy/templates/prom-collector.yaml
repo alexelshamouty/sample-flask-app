@@ -1,7 +1,7 @@
 apiVersion: monitoring.googleapis.com/v1alpha1
 kind: PodMonitoring
 metadata:
-  name: prom-collector
+  name: {{ .Values.promname }}
 spec:
   selector:
     matchLabels:

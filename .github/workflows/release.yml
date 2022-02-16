@@ -1,6 +1,11 @@
 # This is a basic workflow to help you get started with Actions
 
 name: RELEASE
+env:
+  GCP_PROJECT_ID: "myapp-341118"
+  GKE_CLUSTER_NAME: "prod-cluster"
+  GCP_REGION: "europe-west4"
+  GCP_ARTIFACT_REPOSITORY: "my-secure-apps"
 
 # Controls when the workflow will run
 on:
@@ -23,15 +28,57 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Install tools
+        run: |
+          wget -q https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux -O /usr/local/bin/sops
+          chmod a+x /usr/local/bin/sops
+          
+          wget -q https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz -O- | tar -xz --strip-components=1 -C /usr/local/bin
+          chmod a+x /usr/local/bin/helm
+          
+          wget -q https://github.com/roboll/helmfile/releases/download/v0.143.0/helmfile_linux_amd64 -O /usr/local/bin/helmfile
+          chmod a+x /usr/local/bin/helmfile
+          
+          wget  -q "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl
+          
+          helm plugin install https://github.com/jkroepke/helm-secrets
+          helm plugin install https://github.com/databus23/helm-diff
+
+      - name: Setup Gcloud
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          export_default_credentials: true
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ env.GCP_PROJECT_ID }}
+
+      - name: Check that we have access to the cluster
+        run: |
+          gcloud info
+          gcloud config set  project ${{ env.GCP_PROJECT_ID }}
+
+      - name: Configure docker and kubectl
+        run: |
+          gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev
+          gcloud container clusters get-credentials ${{ env.GKE_CLUSTER_NAME }} --region ${{ env.GCP_REGION }} --project ${{ env.GCP_PROJECT_ID }}
+          kubectl cluster-info
+          kubectl config current-context
+
+
       # Runs a single command using the runners shell
       - name: Run Docker build
-        run: docker build . -t myapp
+        run: docker build . -t ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:latest
 
-      - name: Login to artifactrory
+      # Runs a set of commands using the runners shell
+      - name: Run tests
         run: |
-          echo ${{ secrets.ART_PASS }} | docker login --username ${{ secrets.ART_USER }} --password-stdin https://alexedevenv.jfrog.io 
+          echo Running checks
+          docker run ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:${GITHUB_SHA} '/app/checks.sh'
 
-      - name: tag and push my app
-        run: | 
-          docker tag myapp alexedevenv.jfrog.io/alexdevenv-docker/myapp:latest
-          docker push alexedevenv.jfrog.io/alexdevenv-docker/myapp:latest
+      - name: Push image to artifacter
+        run: |
+          docker push ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp:latest
+
+      - name: Deploy using helmfile
+        run: |
+          helmfile --debug -e dev apply --set myapp.image.repository=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp
