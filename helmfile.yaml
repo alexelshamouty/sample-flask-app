@@ -17,6 +17,7 @@ releases:
     chart: bitnami/mysql
     values:
       - values-mysql-shared.yaml
+      - mysql-values-{{ .Environment.Name }}.yaml
     secrets:
       - secrets-{{ .Environment.Name }}.yaml
 environments:
