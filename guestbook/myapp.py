@@ -20,7 +20,6 @@ def guestbook():
 @metrics.counter(
     "numer_of_logins",
     "Number of logins",
-    labels={"item_type": lambda: request.view_args["type"]},
 )
 def login():
     form = LoginForm()
