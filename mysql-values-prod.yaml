@@ -1,2 +1,0 @@
-global:
-  imageRegistry: europe-west4-docker.pkg.dev/myapp-341118/my-secure-apps/mysql
