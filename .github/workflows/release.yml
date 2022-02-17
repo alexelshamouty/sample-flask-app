@@ -75,4 +75,4 @@ jobs:
 
       - name: Deploy using helmfile
         run: |
-          helmfile --debug -e prod apply --set image.repository=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/mysql --set myapp.image.repository=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp
+          helmfile --debug -e prod apply --set image.registry=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }} --set image.repository=${{ env.GCP_ARTIFACT_REPOSITORY }}/mysql --set myapp.image.repository=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_ARTIFACT_REPOSITORY }}/myapp
