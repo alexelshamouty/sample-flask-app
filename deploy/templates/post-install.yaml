@@ -30,6 +30,6 @@ spec:
      - name: FLASK_APP
        value: {{ .Values.flask_app }}
    command: ['/bin/bash', '-c']
-   args: ['sleep 10 ; poetry run flask db init; sleep 1 ; poetry run flask db migrate ; sleep 1 ;  poetry run flask db upgrade; sleep 10']
+   args: ['sleep 60 ; poetry run flask db init; sleep 1 ; poetry run flask db migrate ; sleep 1 ;  poetry run flask db upgrade; sleep 10']
  restartPolicy: Never
  terminationGracePeriodSeconds: 0
