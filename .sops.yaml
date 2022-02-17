@@ -1,5 +1,5 @@
 creation_rules:
   - path_regex: secrets-prod\.yaml$
-    age: age1hgkpp6efe38j8d3fdfeked9h97w7hdycqp90dnzzw0dlyfkdavgqp5kysu
+    gcp_kms: projects/myapp-341118/locations/global/keyRings/myapp-prod/cryptoKeys/myapp-prod 
   - path_regex: secrets-dev\.yaml$
     gcp_kms: projects/myapp-341118/locations/europe-west4/keyRings/myappkeyrong/cryptoKeys/myappkey
