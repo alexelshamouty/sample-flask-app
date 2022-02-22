@@ -45,6 +45,10 @@ def add_review():
     return render_template("add_review.html", form=form)
 
 
+@app.route('/newversion', methods=["GET","POST"])
+def newversion():
+        return "<p> version 2 has been deployed"
+
 @app.route("/debug-sentry")
 def trigger_error():
     division_by_zero = 1 / 0
